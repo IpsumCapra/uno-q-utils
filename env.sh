@@ -33,7 +33,24 @@ start-app() {
   local tag="${2:-0.1.0}"
   local name="$(basename "$PWD")"
   docker build -t $name:$tag $path
-  docker create --privileged -v /sys/class/leds:/sys/class/leds --name $name $name:$tag
+  docker create --privileged \
+    -v /sys/class/leds:/sys/class/leds \
+    -v /var/run/arduino-router.sock:/var/run/arduino-router.sock \
+    --name $name $name:$tag
+  docker start $name
+}
+
+start-web-app() {
+  local path="${1:-app}"
+  local tag="${2:-0.1.0}"
+  local name="$(basename "$PWD")"
+  local port="${3:-8000}"
+  docker build -t $name:$tag $path
+  docker create --privileged \
+    -v /sys/class/leds:/sys/class/leds \
+    -v /var/run/arduino-router.sock:/var/run/arduino-router.sock \
+    -p $port:$port \
+    --name $name $name:$tag
   docker start $name
 }
 

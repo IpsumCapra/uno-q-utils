@@ -41,6 +41,7 @@ The heart of the uno-q-utils, streamlining your development process:
 
 - `upload [name]` Same as with compile, but also uploads the sketch to the MCU of the UNO Q.
 - `start-app [name]` May be used from the project directory, or the path to your app may be passed. Will create and start a docker container with your app.
+- `start-web-app [name] [port]` Same as `start-app` but also exposes a port for (web) traffic.
 - `stop-app [name]` May be used from the project directory, or the path to your app may be passed. Will stop and destroy the specified docker container.
 
 **The following commands only work on your development machine:**
